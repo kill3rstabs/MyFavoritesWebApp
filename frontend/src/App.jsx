@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Router,
   Routes,
   Route,
   BrowserRouter
@@ -10,6 +9,7 @@ import {
 
 import Login from "./components/login";
 import Dashboard from "./components/dashboard";
+import SignUp from "./components/SignUp";
 
 
 
@@ -20,7 +20,7 @@ const App = () => {
       <Route path="/" element={<Login/>}/>
         <Route path="/dashboard/:id" element={<Dashboard/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Login/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
       </Routes>
     </BrowserRouter>
   );

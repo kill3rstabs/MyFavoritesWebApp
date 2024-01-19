@@ -5,36 +5,45 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; 
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleLogin = () => {
     const data = {
       email: email,
-      password: password
+      password: password,
     };
 
     // Replace 'YOUR_LOGIN_API_ENDPOINT' with the actual endpoint URL for login
-    const loginApiUrl = 'YOUR_LOGIN_API_ENDPOINT';
+    const loginApiUrl = "YOUR_LOGIN_API_ENDPOINT";
 
-    axios.post(loginApiUrl, data)
-      .then(response => {
-        // Assuming your login API returns some indication of success, modify the condition accordingly
+    axios
+      .post(loginApiUrl, data)
+      .then((response) => {
         if (response.data.success) {
-          setLoggedIn(true);
-          // Redirect to the dashboard upon successful login
-          history.push('/dashboard');
+          navigate("/dashboard");
         } else {
           // Handle unsuccessful login
-          console.log('Login failed. Please check your credentials.');
+          console.log("Login failed. Please check your credentials.");
         }
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle errors here
-        console.error('Error during login:', error);
+        console.error("Error during login:", error);
       });
+  };
+
+  const handleSignup = () => {
+    try {
+      navigate("/signup");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -62,9 +71,17 @@ const Login = () => {
             sx={{ mt: "30px" }}
             variant="contained"
             color="secondary"
-            onClick={handleSubmit}
+            onClick={handleLogin}
           >
-            Login
+            Log In
+          </Button>
+          <Button
+            sx={{ mt: "30px" }}
+            variant="contained"
+            color="secondary"
+            onClick={handleSignup}
+          >
+            Sign Up
           </Button>
         </Box>
       </Container>
